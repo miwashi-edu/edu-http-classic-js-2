@@ -5,42 +5,43 @@
 ```bash
 cd ~
 cd ws
-mkdir gomoku-backend
 cd gomoku-backend
-mkdir public
-touch ./public/{index.html,index.js,index.css}
-npm install -g http-server
-
+mkdir ./src/routes
+touch ./src/routes/gomoku_routes.js
 ```
 
-## ./public/index.html
+## ./src/service.js
 ```bash
-cat > ./public/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="/index.css">
-    </head>
-    <body>
-        <h1>Hello World</h1>
-        <script src='/index.js'/>
-    </body>
-</html>
+
+cat > ./src/service.js << 'EOF'
+const express = require('express');
+const app = express();
+app.use(express.json());
+app.use('/api/gomoku', require('./routes/gomoku_routes.js'))
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+    console.log(`http server listening on port ${PORT}`)
+});
 EOF
 ```
 
-## ./public/index.html
+## ./src/routes/gomoku_routes.js
 ```bash
-cat > ./public/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="/index.css">
-    </head>
-    <body>
-        <h1>Hello World</h1>
-        <script src='/index.js'/>
-    </body>
-</html>
+cat > ./src/routes/gomoku_routes.js << 'EOF'
+const router = require('express').Router();
+
+router.get('/create_game', (req, res) =>{
+    res.json({status: "success"});
+});
+
+router.get('/add_player', (req, res) =>{
+    res.json({status: "success"});
+});
+
+router.get('/play', (req, res) =>{
+    res.json({status: "success"});
+});
+
+module.exports = router;
 EOF
 ```
