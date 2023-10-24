@@ -7,7 +7,7 @@
 
 ## ./src/routes/gomoku_routes.js
 ```bash
-cat > ./public/index.html << 'EOF'
+cat > ./src/routes/gomoku_routes.js << 'EOF'
 const express = require('express');
 const router = express.Router();
 const gameData = require('./game.json');  // adjust the path if the file is in a different directory
