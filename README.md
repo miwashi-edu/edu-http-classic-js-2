@@ -5,42 +5,24 @@
 ```bash
 cd ~
 cd ws
-mkdir gomoku-backend
 cd gomoku-backend
-mkdir public
-touch ./public/{index.html,index.js,index.css}
-npm install -g http-server
-
+mkdir {public,src}
+touch ./src/service.js
+npm init -y
+npm install express
+npm pkg set scripts.start="node ./src/service.js"
+npm pkg set scripts.dev="node --watch ./src/service.js"
 ```
 
-## ./public/index.html
+## ./src/service.js
 ```bash
-cat > ./public/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="/index.css">
-    </head>
-    <body>
-        <h1>Hello World</h1>
-        <script src='/index.js'/>
-    </body>
-</html>
-EOF
-```
-
-## ./public/index.html
-```bash
-cat > ./public/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="/index.css">
-    </head>
-    <body>
-        <h1>Hello World</h1>
-        <script src='/index.js'/>
-    </body>
-</html>
+cat > ./src/service.js << 'EOF'
+const express = require('express');
+const app = express();
+app.use(express.static('public'))
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+    console.log(`http server listening on port ${PORT}`)
+});
 EOF
 ```
